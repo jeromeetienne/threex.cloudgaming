@@ -1,0 +1,36 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="bower_components/virtualjoystick.js/virtualjoystick.js"></script>
+<script src="../threex.cloudcontroller.js"></script>
+<script src="../threex.cloudcontrollerscreenupdater.js"></script>
+<script src="../threex.cloudcontrollervirtualjoystick.js"></script>
+<body style='width:100%;margin: 0px; background-color: #bbbbbb; overflow: hidden;'>
+<!-- <img id='remoteImage' src=''/>	 -->
+<script>
+window.addEventListener('load', function(event){
+	var cloudController	= new THREEx.CloudController()
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		screenUpdater							//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+
+	var screenUpdater	= new THREEx.CloudControllerScreenUpdater(cloudController)
+	document.body.appendChild(screenUpdater.domElement)
+
+	screenUpdater.sendResolution()
+	
+	setTimeout(function(){	
+		screenUpdater.sendResolution()
+	}, 1000*0.5)
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		virtualjoystick							//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var cloudVirtualJoystick	= new THREEx.CloudControllerVirtualJoystick(cloudController)
+	setInterval(function(){
+		cloudVirtualJoystick.sendIfChanged()
+	}, 1000*1/20)	
+})
+
+</script></body>

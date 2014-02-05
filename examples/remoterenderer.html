@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<script src='vendor/require.js/require.js'></script>
+<script src='vendor/three.js/build/three.js'></script>
+<script src='../threex.cloudrenderer.js'></script>
+<script src='../threex.cloudrendererscreenupdater.js'></script>
+<script src='../threex.cloudrenderervirtualjoystick.js'></script>
+<script src="/socket.io/socket.io.js"></script>
+<body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'><script>
+require([ 'bower_components/threex.minecraft/package.require.js'
+	, 'bower_components/threex.skymap/package.require.js'
+	, 'bower_components/threex.montainsarena/package.require.js'
+	], function(){
+	var renderer	= new THREE.WebGLRenderer({
+		preserveDrawingBuffer : true
+	});
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	renderer.setSize( 256,256 );
+	document.body.appendChild( renderer.domElement );
+
+	var onRenderFcts= [];
+	var scene	= new THREE.Scene();
+	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 10000 );
+	var camera	= new THREE.PerspectiveCamera(45, 256/256, 0.01, 1000 );
+	camera.position.z = 2;
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add the montains						//
+	//////////////////////////////////////////////////////////////////////////////////	
+	var mesh	= new THREEx.MontainsArena()
+	mesh.scale.multiplyScalar(30)
+	scene.add(mesh)
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		ground								//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var textureUrl	= 'images/UV_Grid_Sm.jpg';
+	var texture	= THREE.ImageUtils.loadTexture(textureUrl);
+	texture.wrapS	= THREE.RepeatWrapping;
+	texture.wrapT	= THREE.RepeatWrapping;
+	texture.repeat.x= 10
+	texture.repeat.y= 10
+	texture.anisotropy = 16;
+
+	var geometry	= new THREE.CircleGeometry(30, 32)
+	var material	= new THREE.MeshBasicMaterial({
+		map	: texture,
+		// color	: 'red'
+	})
+ 	var mesh	= new THREE.Mesh(geometry, material)
+ 	mesh.lookAt(new THREE.Vector3(0,1,0))
+ 	scene.add(mesh)
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var mesh	= THREEx.createSkymap('mars')
+	scene.add( mesh );
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+
+	var player	= new THREEx.MinecraftPlayer()
+	scene.add(player.character.root)
+	onRenderFcts.push(function(delta, now){
+		player.update(delta, now)
+	})
+	
+	// attach camera to player
+	player.character.root.add(camera)
+	camera.position.z	= -5
+	camera.position.y	= 2
+	camera.lookAt(new THREE.Vector3(0,0.5,1))
+	
+
+	onRenderFcts.push(function(delta){
+		var inputs	= cloudJoystick.inputs
+		player.controls.input.right	= inputs.right
+		player.controls.input.up	= inputs.up
+		player.controls.input.left	= inputs.left
+		player.controls.input.down	= inputs.down
+	})
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		render the scene						//
+	//////////////////////////////////////////////////////////////////////////////////
+	onRenderFcts.push(function(){
+		renderer.render( scene, camera );		
+	})
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		loop runner							//
+	//////////////////////////////////////////////////////////////////////////////////
+	var lastTimeMsec= null
+	requestAnimationFrame(function animate(nowMsec){
+		// keep looping
+		requestAnimationFrame( animate );
+		// measure time
+		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+		lastTimeMsec	= nowMsec
+		// call each update function
+		onRenderFcts.forEach(function(onRenderFct){
+			onRenderFct(deltaMsec/1000, nowMsec/1000)
+		})
+	})
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+
+	var cloudRenderer	= new THREEx.CloudRenderer()	
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		inputs								//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var cloudJoystick	= new THREEx.CloudRendererVirtualJoystick(cloudRenderer)
+
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		screenshot							//
+	//////////////////////////////////////////////////////////////////////////////////
+
+	var screenUpdater	= new THREEx.CloudRendererScreenUpdater(cloudRenderer, renderer, camera)
+	screenUpdater.sendScreenshotIfChanged()
+	setInterval(function(){
+		screenUpdater.sendScreenshotIfChanged()
+	}, 1/30*1000)
+})
+</script></body>
