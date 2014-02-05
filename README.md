@@ -8,19 +8,6 @@ for
 which provide an cloudgaming for other developpers.
 Thus they can copy it and start their own extension.
 
-Show Don't Tell
-===============
-* [examples/remotecontroller.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/remotecontroller.html)
-\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/remotecontroller.html)\] :
-It shows an example of remote controller
-* [examples/remoterenderer.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/remoterenderer.html)
-\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/remoterenderer.html)\] :
-It shows an example of remote renderer
-* [examples/bothsinglepage.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/bothsinglepage.html)
-\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/bothsinglepage.html)\] :
-It shows an example of remote renderer and a remote controller on the same page.
-This is is usefull to debug
-
 Principles
 ==========
 Idea cheap cloud gaming for webgl: from [here](https://plus.google.com/u/0/+JeromeEtienne/posts/9EvYkc7YBgm)
@@ -36,6 +23,20 @@ Idea cheap cloud gaming for webgl: from [here](https://plus.google.com/u/0/+Jero
 
 This is actual cloud gaming! All that with a simple node.js server to write and some js code.
 Performances are left as an exercice to the reader :)
+
+Show Don't Tell
+===============
+* [examples/remotecontroller.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/remotecontroller.html)
+\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/remotecontroller.html)\] :
+It shows an example of remote controller
+* [examples/remoterenderer.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/remoterenderer.html)
+\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/remoterenderer.html)\] :
+It shows an example of remote renderer
+* [examples/bothsinglepage.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/bothsinglepage.html)
+\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/bothsinglepage.html)\] :
+It shows an example of remote renderer and a remote controller on the same page.
+This is is usefull to debug
+
 
 How To Install It
 =================
