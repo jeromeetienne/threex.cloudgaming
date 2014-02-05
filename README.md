@@ -10,12 +10,32 @@ Thus they can copy it and start their own extension.
 
 Show Don't Tell
 ===============
-* [examples/basic.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/basic.html)
-\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/basic.html)\] :
-It shows this feature, and that one which is coded like that.
-* [examples/requirejs.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/requirejs.html)
-\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/requirejs.html)\] :
-It does that this way, and it is cool in that case.
+* [examples/remotecontroller.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/remotecontroller.html)
+\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/remotecontroller.html)\] :
+It shows an example of remote controller
+* [examples/remoterenderer.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/remoterenderer.html)
+\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/remoterenderer.html)\] :
+It shows an example of remote renderer
+* [examples/bothsinglepage.html](http://jeromeetienne.github.io/threex.cloudgaming/examples/bothsinglepage.html)
+\[[view source](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/examples/bothsinglepage.html)\] :
+It shows an example of remote renderer and a remote controller on the same page.
+This is is usefull to debug
+
+Principles
+==========
+Idea cheap cloud gaming for webgl: from [here](https://plus.google.com/u/0/+JeromeEtienne/posts/9EvYkc7YBgm)
+
+* On server side you got a browser web running the game
+* On this server you take regular screenshot .toDataUrl
+* You send them to the player device... mobile phone, tablette whatever.
+* Thus the player can see webgl rendering on any device.
+* The player use touch screen as inputs
+* They are then sent to the server which send them back to the browser.
+* So we got the whole loop. The browser receives inputs from the player.
+* And the player sees what is displayed in the browser.
+
+This is actual cloud gaming! All that with a simple node.js server to write and some js code.
+Performances are left as an exercice to the reader :)
 
 How To Install It
 =================

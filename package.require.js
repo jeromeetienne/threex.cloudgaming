@@ -1,5 +1,8 @@
 define( [ './threex.cloudrenderer'
-	, './threex.cloudcontroller'
 	, './threex.cloudrendererscreenupdater'
+	, './threex.cloudrenderervirtualjoystick'
+	, './threex.cloudcontroller'
+	, './threex.cloudcontrollerscreenupdater'
+	, './threex.cloudcontrollervirtualjoystick'
 	], function(){
 });

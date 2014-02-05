@@ -2,7 +2,7 @@
 
 .PHONY: server
 server:
-	node app.js
+	node server.js
 
 deploy:
 	# assume there is something to commit
