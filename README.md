@@ -8,6 +8,8 @@ for
 which provide an cloudgaming for other developpers.
 Thus they can copy it and start their own extension.
 
+You can see slides [here](http://jeromeetienne.github.io/threex.cloudgaming/slides/)
+
 Principles
 ==========
 Idea cheap cloud gaming for webgl: from [here](https://plus.google.com/u/0/+JeromeEtienne/posts/9EvYkc7YBgm)

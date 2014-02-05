@@ -13,8 +13,6 @@ THREEx.CloudRendererScreenUpdater	= function(cloudRenderer, renderer, camera){
 	cloudRenderer.addEventListener('controllerResolution', function(size){
 		console.log('sendControllerResolution', size)
 
-		// renderer.devicePixelRatio	= size.devicePixelRatio
-
 		renderer.setSize( size.width, size.height )
 
 		camera.aspect	= size.width/size.height
