@@ -272,7 +272,7 @@ Difference of network latency
 
 --
 
-### A Remarcable Sweat Spot 
+### A Remarquable Sweat Spot 
 
 * if rendered image doesnt change, it can be cached
   * on server and/or controller
