@@ -411,6 +411,10 @@ pre .chunk {
 </ul>
 <p><strong>status</strong> : experimental, naive but working surprisingly well!</p>
 </section>
+    <section class="slide"><h3 id="demo-time">Demo Time</h3>
+<p>Youtube video <a href="http://www.youtube.com/watch?v=yTSXLyg1uu8">here</a></p>
+<p>  iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/yTSXLyg1uu8&quot; frameborder=&quot;0&quot; allowfullscreen&gt;</iframe></p>
+</section>
     <section class="slide"><h3 id="what-is-cloud-gaming-">What is Cloud Gaming ?</h3>
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/Cloud_gaming">wikipedia</a> definition</li>
@@ -435,6 +439,8 @@ on a device B, typically dumber than A.</code></pre>
 <li>on a non-webgl player device</li>
 </ul>
 <p><strong>Simple Enougth...</strong></p>
+</section>
+    <section class="slide"><h1 id="early-data">Early Data</h1>
 </section>
     <section class="slide"><h3 id="early-data-rendering">Early data - rendering</h3>
 <ul>
@@ -468,31 +474,45 @@ on a device B, typically dumber than A.</code></pre>
 </ul>
 <p><strong>implementation is easy</strong></p>
 </section>
-    <section class="slide"><h3 id="principles-of-operations">Principles Of Operations</h3>
+    <section class="slide"><h1 id="principles-of-operations">Principles Of Operations</h1>
+</section>
+    <section class="slide"><h3 id="principles-of-operations-server">Principles Of Operations / Server</h3>
 <ul>
-<li>on server side you got a browser web running the game</li>
-<li>On this server you take regular screenshot .toDataUrl</li>
-<li>You send them to the player device... mobile phone, tablette whatever.</li>
+<li>a renderer browser web running the game</li>
+<li>take regular screenshots with <a href="https://developer.mozilla.org/en/docs/Web/API/HTMLCanvasElement#Methods">.toDataUrl()</a></li>
+<li>Send them to the player device via echo server <ul>
+<li>mobile phone, tablette whatever.</li>
+</ul>
+</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="principles-of-operations">Principles Of Operations</h3>
+    <section class="slide"><h3 id="principles-of-operations-player">Principles Of Operations / Player</h3>
 <ul>
-<li>Thus the player can see webgl rendering on any device.</li>
-<li>The player use touch screen as inputs</li>
-<li>They are then sent to the server which send them back to the browser.</li>
+<li>player can see webgl rendering on any device</li>
+<li>player uses touch screen as inputs</li>
+<li>inputs are then sent to the server </li>
+<li>server send them back to the renderer.</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="principles-of-operations">Principles Of Operations</h3>
+    <section class="slide"><h3 id="principles-of-operations-output">Principles Of Operations / Output</h3>
 <ul>
-<li>So we got the whole loop. The browser receives inputs from the player.</li>
-<li>And the player sees what is displayed in the browser.</li>
+<li>browser receives inputs from the player.</li>
+<li>player sees what is displayed in the browser.</li>
+</ul>
+<p><strong>we got the whole loop</strong></p>
+</section>
+    <section class="slide"><h3 id="principles-of-operations-results">Principles Of Operations / Results</h3>
+<ul>
+<li>this is actual cloud gaming! </li>
+<li>Simple implementation</li>
+<li>Less than 24h to write!</li>
+<li>Performances? left as an exercice to the reader :)<ul>
+<li>ok we talk about it at the end</li>
+</ul>
+</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="principles-of-operations">Principles Of Operations</h3>
-<ul>
-<li>this is actual cloud gaming! All that with a simple node.js server to write and some js code. Maybe a few days. Surely less than a week.</li>
-<li>Performances are left as an exercice to the reader :)</li>
-</ul>
+    <section class="slide"><h1 id="separator">Separator</h1>
 </section>
     <section class="slide"><h3 id="network-performance">Network Performance</h3>
 <p>3 areas affect network performances</p>
@@ -538,6 +558,8 @@ on a device B, typically dumber than A.</code></pre>
 <li>send image thru a movie format</li>
 </ul>
 </section>
+    <section class="slide"><h1 id="separator">Separator</h1>
+</section>
     <section class="slide"><h3 id="could-that-be-the-same-game-">Could that be the same game ?</h3>
 <p>difference of inputs</p>
 <ul>
@@ -573,18 +595,130 @@ on a device B, typically dumber than A.</code></pre>
     <section class="slide"><h3 id="could-that-be-the-same-game-">Could that be the same game ?</h3>
 <p><strong>Nope</strong></p>
 <ul>
-<li>big network requirement outside our controls<ul>
+<li>big network requirement out of our controls<ul>
 <li>mobile network capabilities</li>
 </ul>
 </li>
+<li>issues in our controls are far from simple either</li>
 </ul>
 <p>=&gt; games needs to be adapated to controller capabilities</p>
 </section>
-    <section class="slide"><h3 id="where-to-get-threex-cloudgaming-js">Where to get threex.cloudgaming.js</h3>
+    <section class="slide"><h1 id="separator">Separator</h1>
+</section>
+    <section class="slide"><h3 id="initial-thoughts">Initial Thoughts</h3>
 <ul>
-<li>Repo - <a href="https://github.com/jeromeetienne/threex.cloudgaming">github</a> </li>
-<li>License - <a href="http://jetienne.mit-license.org/">MIT</a></li>
+<li>as game must be adapted</li>
+<li>as fps are very costly on remote controller</li>
+<li>how can you adapt your game</li>
 </ul>
+</section>
+    <section class="slide"><ul>
+<li>reduce the need for fps</li>
+<li>it is all between how dumb is the remote controller</li>
+<li>depending on its capability you can run part of the game there</li>
+<li>it doesnt have to be fully dumb</li>
+<li>part of the game run on the server, part run on the controller</li>
+<li>give examples</li>
+</ul>
+</section>
+    <section class="slide"><h3 id="a-remarcable-sweat-spot">A Remarcable Sweat Spot</h3>
+<ul>
+<li>if rendered image doesnt change, it can be cached<ul>
+<li>on server and/or controller</li>
+<li>if cache on player device, it enabled offline playing!</li>
+</ul>
+</li>
+<li>for navigation, prefer fixed point<ul>
+<li>the player go from one point to another</li>
+<li>make caching more easy</li>
+</ul>
+</li>
+<li>Combine both and you can navigate your 3d world like that<ul>
+<li>very similar to <a href="https://www.google.com/maps/views/streetview">google street view</a></li>
+</ul>
+</li>
+</ul>
+</section>
+    <section class="slide"><h1 id="separator">Separator</h1>
+</section>
+    <section class="slide"><h1 id="implementation">Implementation</h1>
+</section>
+    <section class="slide"><h3 id="status">Status</h3>
+<p>Working and Available</p>
+<ul>
+<li>published on <a href="https://github.com/jeromeetienne/threex.cloudgaming">github</a> </li>
+<li>as a <a href="http://jeromeetienne.github.io/threex/">threex</a> extension for <a href="http://threejs.org">three.js</a></li>
+<li>under <a href="http://jetienne.mit-license.org/">MIT</a></li>
+</ul>
+</section>
+    <section class="slide"><h3 id="what-">What ?</h3>
+<ul>
+<li>a <strong>minigame</strong> using three.js which run <strong>on renderer</strong></li>
+<li>a <strong>controller</strong> for this game to run <strong>on player device</strong></li>
+<li>a <strong>server</strong> to communicate <strong>between both</strong></li>
+</ul>
+</section>
+    <section class="slide"><h3 id="definitly-simple">Definitly Simple</h3>
+<p>for <a href="http://jeromeetienne.github.io/threex/#threex.cloudgaming">threex.cloudgaming</a></p>
+<pre><code>$ wc -l *.js
+311</code></pre>
+<p>Full implementation 311 lines</p>
+</section>
+    <section class="slide"><h3 id="renderer-minigame">Renderer - Minigame</h3>
+<ul>
+<li>all from <a href="http://jeromeetienne.github.io/threex/">threex</a> extension for <a href="http://threejs.org">three.js</a></li>
+<li><a href="https://github.com/jeromeetienne/threex.minecraft">threex.minecraft</a> for the minecraft character</li>
+<li><a href="https://github.com/jeromeetienne/threex.montainarena">threex.montainarena</a> for montains</li>
+<li><a href="https://github.com/jeromeetienne/threex.grassground">threex.grassground</a> for the ground</li>
+<li><a href="https://github.com/jeromeetienne/threex.skymap">threex.skymap</a> for the sky</li>
+</ul>
+</section>
+    <section class="slide"><h3 id="controller-minigame">Controller - Minigame</h3>
+<ul>
+<li>use <a href="http://github.com/jeromeetienne/virtualjoystick.js">virtualjoystick.js</a> to have joystick on touch screen</li>
+<li>Provide right/up/left/down</li>
+</ul>
+<p><strong>TODO</strong> screenshot fro this lib. take it from the post</p>
+</section>
+    <section class="slide"><h3 id="threex-cloudgaming-the-base">threex.cloudgaming - The Base</h3>
+<ul>
+<li>connect to server</li>
+<li>provide echo service thru server</li>
+</ul>
+<h4 id="code">Code</h4>
+<ul>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderer.js">threex.cloudrenderer.js</a> - 63 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontroller.js">threex.cloudcontroller.js</a> - 67 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.server.js">server.js</a> - 14 lines</li>
+</ul>
+</section>
+    <section class="slide"><h3 id="screen-updater">Screen Updater</h3>
+<ul>
+<li>handle window resize in controller<ul>
+<li>notify the renderer when it happens</li>
+</ul>
+</li>
+<li>handle screen update from server to controller</li>
+</ul>
+<h4 id="code">Code</h4>
+<ul>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrendererscreenupdater.js">threex.cloudrendererscreenupdater.js</a> - 53 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollerscreenupdater.js">threex.cloudcontrollerscreenupdater.js</a> - 42 lines</li>
+</ul>
+</section>
+    <section class="slide"><h3 id="virtual-joystick">Virtual Joystick</h3>
+<ul>
+<li>read <code>virtualjoystick.js</code> inputs on player device</li>
+<li>send them to renderer via server</li>
+<li>renderer to pass that to the minigame</li>
+</ul>
+<h4 id="code">Code</h4>
+<ul>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderervirutaljoystick.js">threex.cloudrenderervirtualjoystick.js</a> - 46 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollervirtualjoystick.js">threex.cloudcontrollervirtualjoystick.js</a> - 19 lines</li>
+</ul>
+</section>
+    <section class="slide"><h1 id="separator">Separator</h1>
 </section>
     <section class="slide"><h1 id="questions-">Questions ?</h1>
 <h2 id="-jerome-etienne-http-twitter-com-jerome_etienne-"><a href="http://twitter.com/jerome_etienne">Jerome Etienne</a></h2>

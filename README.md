@@ -5,8 +5,13 @@ It is a
 [threex](http://jeromeetienne.github.io/threex/) module 
 for 
 [three.js](http://threejs.org)
-which provide an cloudgaming for other developpers.
-Thus they can copy it and start their own extension.
+which provide an 2-cents cloudgaming solution for webgl games.
+The implementation is simple. The whole thing is 300lines at the moment.
+It is easy to use too. 
+I did a minigame to test it. It worked ok at 20fps
+over wifi. 
+Performances may fit your use case or not.
+Bench it and see. 
 
 You can see slides [here](http://jeromeetienne.github.io/threex.cloudgaming/slides/)
 
