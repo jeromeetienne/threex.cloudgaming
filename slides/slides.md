@@ -31,7 +31,7 @@ output: index.html
 
 Youtube video [here](http://www.youtube.com/watch?v=yTSXLyg1uu8)
 
-  iframe width="560" height="315" src="//www.youtube.com/embed/yTSXLyg1uu8" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="//www.youtube.com/embed/K8VTbyUe6_0" frameborder="0" allowfullscreen></iframe>
 
 --
 
@@ -151,6 +151,104 @@ Let's clear the dust a bit...
 * Less than 24h to write!
 * Performances? left as an exercice to the reader :)
   * ok we talk about it at the end
+
+--
+
+# Separator
+
+--
+
+# Implementation
+
+--
+
+### Status
+
+Working and Available
+
+* published on [github](https://github.com/jeromeetienne/threex.cloudgaming) 
+* as a [threex](http://jeromeetienne.github.io/threex/) extension for [three.js](http://threejs.org)
+* under [MIT](http://jetienne.mit-license.org/)
+
+--
+
+### What ?
+
+* a **minigame** using three.js which run **on renderer**
+* a **controller** for this game to run **on player device**
+* a **server** to communicate **between both**
+
+--
+
+### Definitly Simple
+
+for [threex.cloudgaming](http://jeromeetienne.github.io/threex/#threex.cloudgaming)
+
+```
+$ wc -l *.js
+311
+```
+
+Full implementation 311 lines
+
+--
+
+### Renderer - Minigame 
+
+* all from [threex](http://jeromeetienne.github.io/threex/) extension for [three.js](http://threejs.org)
+* [threex.minecraft](https://github.com/jeromeetienne/threex.minecraft) for the minecraft character
+* [threex.montainarena](https://github.com/jeromeetienne/threex.montainarena) for montains
+* [threex.grassground](https://github.com/jeromeetienne/threex.grassground) for the ground
+* [threex.skymap](https://github.com/jeromeetienne/threex.skymap) for the sky
+
+--
+
+### Controller - Minigame
+
+* use [virtualjoystick.js](http://github.com/jeromeetienne/virtualjoystick.js) to have joystick on touch screen
+* more info in [this post](http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/) froms [learning three.js blog](http://learningthreejs.com).
+* Provide right/up/left/down
+
+**TODO** screenshot fro this lib. take it from the post
+
+--
+
+### threex.cloudgaming - The Base
+
+* connect to server
+* provide echo service thru server
+
+#### Code
+
+* [threex.cloudrenderer.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderer.js) - 63 lines
+* [threex.cloudcontroller.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontroller.js) - 67 lines
+* [server.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.server.js) - 14 lines
+
+--
+
+### Screen Updater
+
+* handle window resize in controller
+  * notify the renderer when it happens
+* handle screen update from server to controller
+
+#### Code
+
+* [threex.cloudrendererscreenupdater.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrendererscreenupdater.js) - 53 lines
+* [threex.cloudcontrollerscreenupdater.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollerscreenupdater.js) - 42 lines
+
+--
+
+### Virtual Joystick
+
+* read ```virtualjoystick.js``` inputs on player device
+* send them to renderer via server
+* renderer to pass that to the minigame
+
+#### Code
+
+* [threex.cloudrenderervirtualjoystick.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderervirutaljoystick.js) - 46 lines
+* [threex.cloudcontrollervirtualjoystick.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollervirtualjoystick.js) - 19 lines
 
 --
 
@@ -282,103 +380,6 @@ Difference of network latency
   * make caching more easy
 * Combine both and you can navigate your 3d world like that
   * very similar to [google street view](https://www.google.com/maps/views/streetview)
-
---
-
-# Separator
-
---
-
-# Implementation
-
---
-
-### Status
-
-Working and Available
-
-* published on [github](https://github.com/jeromeetienne/threex.cloudgaming) 
-* as a [threex](http://jeromeetienne.github.io/threex/) extension for [three.js](http://threejs.org)
-* under [MIT](http://jetienne.mit-license.org/)
-
---
-
-### What ?
-
-* a **minigame** using three.js which run **on renderer**
-* a **controller** for this game to run **on player device**
-* a **server** to communicate **between both**
-
---
-
-### Definitly Simple
-
-for [threex.cloudgaming](http://jeromeetienne.github.io/threex/#threex.cloudgaming)
-
-```
-$ wc -l *.js
-311
-```
-
-Full implementation 311 lines
-
---
-
-### Renderer - Minigame 
-
-* all from [threex](http://jeromeetienne.github.io/threex/) extension for [three.js](http://threejs.org)
-* [threex.minecraft](https://github.com/jeromeetienne/threex.minecraft) for the minecraft character
-* [threex.montainarena](https://github.com/jeromeetienne/threex.montainarena) for montains
-* [threex.grassground](https://github.com/jeromeetienne/threex.grassground) for the ground
-* [threex.skymap](https://github.com/jeromeetienne/threex.skymap) for the sky
-
---
-
-### Controller - Minigame
-
-* use [virtualjoystick.js](http://github.com/jeromeetienne/virtualjoystick.js) to have joystick on touch screen
-* Provide right/up/left/down
-
-**TODO** screenshot fro this lib. take it from the post
-
---
-
-### threex.cloudgaming - The Base
-
-* connect to server
-* provide echo service thru server
-
-#### Code
-
-* [threex.cloudrenderer.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderer.js) - 63 lines
-* [threex.cloudcontroller.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontroller.js) - 67 lines
-* [server.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.server.js) - 14 lines
-
---
-
-### Screen Updater
-
-* handle window resize in controller
-  * notify the renderer when it happens
-* handle screen update from server to controller
-
-#### Code
-
-* [threex.cloudrendererscreenupdater.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrendererscreenupdater.js) - 53 lines
-* [threex.cloudcontrollerscreenupdater.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollerscreenupdater.js) - 42 lines
-
---
-
-### Virtual Joystick
-
-* read ```virtualjoystick.js``` inputs on player device
-* send them to renderer via server
-* renderer to pass that to the minigame
-
-#### Code
-
-* [threex.cloudrenderervirtualjoystick.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderervirutaljoystick.js) - 46 lines
-* [threex.cloudcontrollervirtualjoystick.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollervirtualjoystick.js) - 19 lines
 
 --
 

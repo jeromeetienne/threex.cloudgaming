@@ -43,5 +43,5 @@ THREEx.CloudControllerVirtualJoystick	= function(cloudController){
 			type	: 'joystick',
 			data	: inputs
 		})		
-	}			
+	}
 }

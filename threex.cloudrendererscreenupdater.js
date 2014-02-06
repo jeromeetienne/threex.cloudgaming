@@ -24,8 +24,15 @@ THREEx.CloudRendererScreenUpdater	= function(cloudRenderer, renderer, camera){
 	//////////////////////////////////////////////////////////////////////////////////
 	
 	var lastDataUrl		= ''
+	var maxFps		= 20
+	var lastDate		= null
 	this.sendScreenshotIfChanged	= function(){
+		var present	= Date.now()/1000
+		if( lastDate !== null && present - lastDate < 1/maxFps )	return;
+		lastDate	= present
+
 		var dataUrl	= renderer.domElement.toDataURL("image/webp");
+		
 		
 		// see if the screenshot changed
 		var hasChanged	= dataUrl !== lastDataUrl ? true : false

@@ -10,11 +10,21 @@ var THREEx	= THREEx	|| {};
  * @constructor
  */
 THREEx.CloudControllerScreenUpdater	= function(cloudController){
-	// create domElement
-	var domElement	= document.createElement('img')
-	this.domElement	= domElement
-	domElement.id	= 'remoteImage'
+	var renderInImage	= false
+	this.devicePixelRatio	= 1/8
 	
+	if( renderInImage === true ){
+		// create domElement
+		var domElement	= document.createElement('img')
+		this.domElement	= domElement	
+	}else{	
+		var domElement	= document.createElement('canvas')
+		var context	= domElement.getContext("2d")
+		this.domElement	= domElement
+		domElement.width	= window.innerWidth  * this.devicePixelRatio
+		domElement.height	= window.innerHeight * this.devicePixelRatio
+	}
+
 	//////////////////////////////////////////////////////////////////////////////////
 	//		update screenshot from renderer					//
 	//////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +34,16 @@ THREEx.CloudControllerScreenUpdater	= function(cloudController){
 		console.log('update screenshot')
 		// TODO maybe here draw to canvas
 		// in ipad the img cant be updated when i touch the screen
-		domElement.src	= dataUrl
+		if( renderInImage === true ){
+			domElement.src	= dataUrl		
+		}else{	
+			// Create a new image object.
+			var image	= new Image();
+			image.src	= dataUrl;
+			image.onload	= function(){
+				context.drawImage(image, 0,0, domElement.width, domElement.height)
+			}
+		}
 	})
 
 
@@ -32,10 +51,9 @@ THREEx.CloudControllerScreenUpdater	= function(cloudController){
 	//		handle resolution						//
 	//////////////////////////////////////////////////////////////////////////////////
 
-	this.devicePixelRatio	= 1/4
+
 	domElement.style.width	= window.innerWidth +'px';
 	domElement.style.height	= window.innerHeight+'px';
-
 	this.sendResolution	= function(){
 		var data	= {
 			width	: window.innerWidth * this.devicePixelRatio,
@@ -48,7 +66,14 @@ THREEx.CloudControllerScreenUpdater	= function(cloudController){
 		})
 	}
 	window.addEventListener('resize', function(event){
+		domElement.style.width	= window.innerWidth +'px';
+		domElement.style.height	= window.innerHeight+'px';
+
 		// console.log('resize', event)
+		domElement.width	= window.innerWidth  / this.devicePixelRatio
+		domElement.height	= window.innerHeight / this.devicePixelRatio
+
 		this.sendResolution()
+
 	}.bind(this))
 }

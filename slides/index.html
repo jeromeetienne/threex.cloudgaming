@@ -413,8 +413,7 @@ pre .chunk {
 </section>
     <section class="slide"><h3 id="demo-time">Demo Time</h3>
 <p>Youtube video <a href="http://www.youtube.com/watch?v=yTSXLyg1uu8">here</a></p>
-<p>  iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/yTSXLyg1uu8&quot; frameborder=&quot;0&quot; allowfullscreen&gt;</iframe></p>
-</section>
+<iframe width="560" height="315" src="//www.youtube.com/embed/K8VTbyUe6_0" frameborder="0" allowfullscreen></iframe></section>
     <section class="slide"><h3 id="what-is-cloud-gaming-">What is Cloud Gaming ?</h3>
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/Cloud_gaming">wikipedia</a> definition</li>
@@ -510,6 +509,86 @@ on a device B, typically dumber than A.</code></pre>
 <li>ok we talk about it at the end</li>
 </ul>
 </li>
+</ul>
+</section>
+    <section class="slide"><h1 id="separator">Separator</h1>
+</section>
+    <section class="slide"><h1 id="implementation">Implementation</h1>
+</section>
+    <section class="slide"><h3 id="status">Status</h3>
+<p>Working and Available</p>
+<ul>
+<li>published on <a href="https://github.com/jeromeetienne/threex.cloudgaming">github</a> </li>
+<li>as a <a href="http://jeromeetienne.github.io/threex/">threex</a> extension for <a href="http://threejs.org">three.js</a></li>
+<li>under <a href="http://jetienne.mit-license.org/">MIT</a></li>
+</ul>
+</section>
+    <section class="slide"><h3 id="what-">What ?</h3>
+<ul>
+<li>a <strong>minigame</strong> using three.js which run <strong>on renderer</strong></li>
+<li>a <strong>controller</strong> for this game to run <strong>on player device</strong></li>
+<li>a <strong>server</strong> to communicate <strong>between both</strong></li>
+</ul>
+</section>
+    <section class="slide"><h3 id="definitly-simple">Definitly Simple</h3>
+<p>for <a href="http://jeromeetienne.github.io/threex/#threex.cloudgaming">threex.cloudgaming</a></p>
+<pre><code>$ wc -l *.js
+311</code></pre>
+<p>Full implementation 311 lines</p>
+</section>
+    <section class="slide"><h3 id="renderer-minigame">Renderer - Minigame</h3>
+<ul>
+<li>all from <a href="http://jeromeetienne.github.io/threex/">threex</a> extension for <a href="http://threejs.org">three.js</a></li>
+<li><a href="https://github.com/jeromeetienne/threex.minecraft">threex.minecraft</a> for the minecraft character</li>
+<li><a href="https://github.com/jeromeetienne/threex.montainarena">threex.montainarena</a> for montains</li>
+<li><a href="https://github.com/jeromeetienne/threex.grassground">threex.grassground</a> for the ground</li>
+<li><a href="https://github.com/jeromeetienne/threex.skymap">threex.skymap</a> for the sky</li>
+</ul>
+</section>
+    <section class="slide"><h3 id="controller-minigame">Controller - Minigame</h3>
+<ul>
+<li>use <a href="http://github.com/jeromeetienne/virtualjoystick.js">virtualjoystick.js</a> to have joystick on touch screen</li>
+<li>more info in <a href="http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/">this post</a> froms <a href="http://learningthreejs.com">learning three.js blog</a>.</li>
+<li>Provide right/up/left/down</li>
+</ul>
+<p><strong>TODO</strong> screenshot fro this lib. take it from the post</p>
+</section>
+    <section class="slide"><h3 id="threex-cloudgaming-the-base">threex.cloudgaming - The Base</h3>
+<ul>
+<li>connect to server</li>
+<li>provide echo service thru server</li>
+</ul>
+<h4 id="code">Code</h4>
+<ul>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderer.js">threex.cloudrenderer.js</a> - 63 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontroller.js">threex.cloudcontroller.js</a> - 67 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.server.js">server.js</a> - 14 lines</li>
+</ul>
+</section>
+    <section class="slide"><h3 id="screen-updater">Screen Updater</h3>
+<ul>
+<li>handle window resize in controller<ul>
+<li>notify the renderer when it happens</li>
+</ul>
+</li>
+<li>handle screen update from server to controller</li>
+</ul>
+<h4 id="code">Code</h4>
+<ul>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrendererscreenupdater.js">threex.cloudrendererscreenupdater.js</a> - 53 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollerscreenupdater.js">threex.cloudcontrollerscreenupdater.js</a> - 42 lines</li>
+</ul>
+</section>
+    <section class="slide"><h3 id="virtual-joystick">Virtual Joystick</h3>
+<ul>
+<li>read <code>virtualjoystick.js</code> inputs on player device</li>
+<li>send them to renderer via server</li>
+<li>renderer to pass that to the minigame</li>
+</ul>
+<h4 id="code">Code</h4>
+<ul>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderervirutaljoystick.js">threex.cloudrenderervirtualjoystick.js</a> - 46 lines</li>
+<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollervirtualjoystick.js">threex.cloudcontrollervirtualjoystick.js</a> - 19 lines</li>
 </ul>
 </section>
     <section class="slide"><h1 id="separator">Separator</h1>
@@ -621,7 +700,7 @@ on a device B, typically dumber than A.</code></pre>
 <li>give examples</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="a-remarcable-sweat-spot">A Remarcable Sweat Spot</h3>
+    <section class="slide"><h3 id="a-remarquable-sweat-spot">A Remarquable Sweat Spot</h3>
 <ul>
 <li>if rendered image doesnt change, it can be cached<ul>
 <li>on server and/or controller</li>
@@ -637,85 +716,6 @@ on a device B, typically dumber than A.</code></pre>
 <li>very similar to <a href="https://www.google.com/maps/views/streetview">google street view</a></li>
 </ul>
 </li>
-</ul>
-</section>
-    <section class="slide"><h1 id="separator">Separator</h1>
-</section>
-    <section class="slide"><h1 id="implementation">Implementation</h1>
-</section>
-    <section class="slide"><h3 id="status">Status</h3>
-<p>Working and Available</p>
-<ul>
-<li>published on <a href="https://github.com/jeromeetienne/threex.cloudgaming">github</a> </li>
-<li>as a <a href="http://jeromeetienne.github.io/threex/">threex</a> extension for <a href="http://threejs.org">three.js</a></li>
-<li>under <a href="http://jetienne.mit-license.org/">MIT</a></li>
-</ul>
-</section>
-    <section class="slide"><h3 id="what-">What ?</h3>
-<ul>
-<li>a <strong>minigame</strong> using three.js which run <strong>on renderer</strong></li>
-<li>a <strong>controller</strong> for this game to run <strong>on player device</strong></li>
-<li>a <strong>server</strong> to communicate <strong>between both</strong></li>
-</ul>
-</section>
-    <section class="slide"><h3 id="definitly-simple">Definitly Simple</h3>
-<p>for <a href="http://jeromeetienne.github.io/threex/#threex.cloudgaming">threex.cloudgaming</a></p>
-<pre><code>$ wc -l *.js
-311</code></pre>
-<p>Full implementation 311 lines</p>
-</section>
-    <section class="slide"><h3 id="renderer-minigame">Renderer - Minigame</h3>
-<ul>
-<li>all from <a href="http://jeromeetienne.github.io/threex/">threex</a> extension for <a href="http://threejs.org">three.js</a></li>
-<li><a href="https://github.com/jeromeetienne/threex.minecraft">threex.minecraft</a> for the minecraft character</li>
-<li><a href="https://github.com/jeromeetienne/threex.montainarena">threex.montainarena</a> for montains</li>
-<li><a href="https://github.com/jeromeetienne/threex.grassground">threex.grassground</a> for the ground</li>
-<li><a href="https://github.com/jeromeetienne/threex.skymap">threex.skymap</a> for the sky</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="controller-minigame">Controller - Minigame</h3>
-<ul>
-<li>use <a href="http://github.com/jeromeetienne/virtualjoystick.js">virtualjoystick.js</a> to have joystick on touch screen</li>
-<li>Provide right/up/left/down</li>
-</ul>
-<p><strong>TODO</strong> screenshot fro this lib. take it from the post</p>
-</section>
-    <section class="slide"><h3 id="threex-cloudgaming-the-base">threex.cloudgaming - The Base</h3>
-<ul>
-<li>connect to server</li>
-<li>provide echo service thru server</li>
-</ul>
-<h4 id="code">Code</h4>
-<ul>
-<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderer.js">threex.cloudrenderer.js</a> - 63 lines</li>
-<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontroller.js">threex.cloudcontroller.js</a> - 67 lines</li>
-<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.server.js">server.js</a> - 14 lines</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="screen-updater">Screen Updater</h3>
-<ul>
-<li>handle window resize in controller<ul>
-<li>notify the renderer when it happens</li>
-</ul>
-</li>
-<li>handle screen update from server to controller</li>
-</ul>
-<h4 id="code">Code</h4>
-<ul>
-<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrendererscreenupdater.js">threex.cloudrendererscreenupdater.js</a> - 53 lines</li>
-<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollerscreenupdater.js">threex.cloudcontrollerscreenupdater.js</a> - 42 lines</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="virtual-joystick">Virtual Joystick</h3>
-<ul>
-<li>read <code>virtualjoystick.js</code> inputs on player device</li>
-<li>send them to renderer via server</li>
-<li>renderer to pass that to the minigame</li>
-</ul>
-<h4 id="code">Code</h4>
-<ul>
-<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderervirutaljoystick.js">threex.cloudrenderervirtualjoystick.js</a> - 46 lines</li>
-<li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollervirtualjoystick.js">threex.cloudcontrollervirtualjoystick.js</a> - 19 lines</li>
 </ul>
 </section>
     <section class="slide"><h1 id="separator">Separator</h1>

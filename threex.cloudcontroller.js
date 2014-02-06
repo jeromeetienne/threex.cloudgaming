@@ -13,7 +13,7 @@ THREEx.CloudController 	= function(){
 	// add microevent
 	THREEx.CloudController.MicroeventMixin(this)
 	// basic connection
-	var socket = io.connect('http://192.168.0.11')
+	var socket = io.connect('http://192.168.1.169')
 	this.socket= socket
 
 	socket.on('connect', function(){

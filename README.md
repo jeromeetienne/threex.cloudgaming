@@ -8,8 +8,8 @@ for
 which provide an 2-cents cloudgaming solution for webgl games.
 The implementation is simple. The whole thing is 300lines at the moment.
 It is easy to use too. 
-I did a minigame to test it. It worked ok at 20fps
-over wifi. 
+I did a minigame to test it. 
+It worked ok at 20fps over wifi. 
 Performances may fit your use case or not.
 Bench it and see. 
 
@@ -69,7 +69,7 @@ It wait on [http://127.0.0.1:8000](http://127.0.0.1:8000)
 It is a simple echo server. 
 It lets *renderer* and *controller* communicate together.
 
-## Use threex.cloudgaming core
+## Use threex.cloudgaming Core
 
 It ensures the communication between renderer and controller via the server.
 
@@ -85,7 +85,7 @@ var cloudRenderer	= new THREEx.CloudRenderer()
 var cloudController	= new THREEx.CloudController()
 ```
 
-## Use Screen updaters
+## Use Screen Updaters
 
 It handles the screen refreshing. When the renderer got a new
 screen to share, it sends it to the remote controller via the server. Additionnaly the controller notifies the renderer when its screen resolution changes.
@@ -102,7 +102,7 @@ Then start sending screenshots to the remote controller when you think it is nec
 screenUpdater.sendScreenshotIfChanged()
 ```
 
-**On Controller**, first, include the source [threex.cloudrendererscreenupdater.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrendererscreenupdater.js) in your page. Then create one.
+**On Controller**, first, include the source [threex.cloudcontrollerscreenupdater.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollerscreenupdater.js) in your page. Then create one.
 
 ```
 var screenUpdater	= new THREEx.CloudControllerScreenUpdater(cloudController)
@@ -116,7 +116,7 @@ It is necessary to read inputs on the player devices, e.g. does the player want 
 For that we use [virtualjoystick.js](https://github.com/jeromeetienne/virtualjoystick.js), a virtual joystick library to emulate a joystick on touch screen in javascript.
 You can read more about this library in ["Let’s Make a 3D Game: Virtual Joystick"](http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/) post on [learning three.js blog](http://learningthreejs.com).
 
-**On Controller**, first, include the source [threex.cloudrenderervirtualjoystick.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderervirtualjoystick.js) in your page. Then create one.
+**On Controller**, first, include the source [threex.cloudcontrollerrvirtualjoystick.js](https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollervirtualjoystick.js) in your page. Then create one.
 
 ```
 var cloudVirtualJoystick	= new THREEx.CloudControllerVirtualJoystick(cloudController)
