@@ -1,13 +1,25 @@
-var express	= require('express')
-var app		= require('express')()
-var server	= require('http').createServer(app)
-var io		= require('socket.io').listen(server);
-server.listen(8000);
-console.log('listen on http://0.0.0.0:8000')
+//////////////////////////////////////////////////////////////////////////////////
+//		comment								//
+//////////////////////////////////////////////////////////////////////////////////
 
-// serve the whole directory as static
-app.use(express.static(__dirname + '/'))
+// serve local dir as static
+var static	= require('node-static');
+var file	= new static.Server('./');
 
+var app	= require('http').createServer(function( request, response ){
+	request.addListener('end', function () {
+		file.serve(request, response);
+	}).resume();
+})
+
+app.listen(8000);
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//		socket.io							//
+//////////////////////////////////////////////////////////////////////////////////
+
+var io	= require('socket.io').listen(app)
 // limit the log level of socket.io
 io.set('log level', 1)
 

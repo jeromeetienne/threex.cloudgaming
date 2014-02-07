@@ -10,7 +10,6 @@ The implementation is simple.
 It is easy to use too. 
 You can include it in your game in a snap.
 The whole thing is a little more 300lines at the moment.
-
 I did a minigame to test it. 
 It worked ok at 20fps over wifi. 
 Performances may fit your use case or not.
