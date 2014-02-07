@@ -14,6 +14,13 @@ window.addEventListener('load', function(event){
 	
 	var cloudController	= new THREEx.CloudController()
 
+	cloudController.socket.on('connect', function(){
+		console.log('connected to server')
+	})
+	cloudController.socket.on('disconnect', function(){
+		console.warn('disconnected from server')
+	})
+
 	//////////////////////////////////////////////////////////////////////////////////
 	//		screenUpdater							//
 	//////////////////////////////////////////////////////////////////////////////////

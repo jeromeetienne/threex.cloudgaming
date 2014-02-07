@@ -11,7 +11,7 @@ var THREEx	= THREEx	|| {};
  */
 THREEx.CloudControllerScreenUpdater	= function(cloudController){
 	var renderInImage	= false
-	this.devicePixelRatio	= 1/8
+	this.devicePixelRatio	= 1/4
 	
 	if( renderInImage === true ){
 		// create domElement
@@ -31,11 +31,11 @@ THREEx.CloudControllerScreenUpdater	= function(cloudController){
 	
 
 	cloudController.addEventListener('screenshot', function(dataUrl){
-		console.log('update screenshot')
+		console.log('update screenshot Length',dataUrl.length)
 		// TODO maybe here draw to canvas
 		// in ipad the img cant be updated when i touch the screen
 		if( renderInImage === true ){
-			domElement.src	= dataUrl		
+			domElement.src	= dataUrl	
 		}else{	
 			// Create a new image object.
 			var image	= new Image();

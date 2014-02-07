@@ -112,11 +112,11 @@ Let's clear the dust a bit...
 
 --
 
-# Principles Of Operations
+# Theory Of Operations
 
 --
 
-### Principles Of Operations / Server
+### Theory Of Operations / Server
 
 
 * a renderer browser web running the game
@@ -126,7 +126,7 @@ Let's clear the dust a bit...
 
 --
 
-### Principles Of Operations / Player
+### Theory Of Operations / Player
 
 * player can see webgl rendering on any device
 * player uses touch screen as inputs
@@ -135,7 +135,7 @@ Let's clear the dust a bit...
 
 --
 
-### Principles Of Operations / Output
+### Theory Of Operations / Output
 
 * browser receives inputs from the player.
 * player sees what is displayed in the browser.
@@ -144,9 +144,9 @@ Let's clear the dust a bit...
 
 --
 
-### Principles Of Operations / Results
+### Theory Of Operations / Results
 
-* this is actual cloud gaming! 
+* This is actual cloud gaming! 
 * Simple implementation
 * Less than 24h to write!
 * Performances? left as an exercice to the reader :)
@@ -203,7 +203,7 @@ Full implementation 311 lines
 
 --
 
-### Controller - Minigame
+### Controller - VirtualJoystick
 
 * use [virtualjoystick.js](http://github.com/jeromeetienne/virtualjoystick.js) to have joystick on touch screen
 * more info in [this post](http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/) froms [learning three.js blog](http://learningthreejs.com).
@@ -213,7 +213,7 @@ Full implementation 311 lines
 
 --
 
-### threex.cloudgaming - The Base
+### threex.cloudgaming - Core
 
 * connect to server
 * provide echo service thru server

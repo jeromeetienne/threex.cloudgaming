@@ -114,6 +114,13 @@ require([ 'bower_components/threex.minecraft/package.require.js'
 
 	var cloudRenderer	= new THREEx.CloudRenderer()	
 	
+	cloudRenderer.socket.on('connect', function(){
+		console.log('connected to server')
+	})
+	cloudRenderer.socket.on('disconnect', function(){
+		console.warn('disconnected from server')
+	})
+
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Virtual Joystick						//
 	//////////////////////////////////////////////////////////////////////////////////

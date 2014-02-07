@@ -13,15 +13,9 @@ THREEx.CloudController 	= function(){
 	// add microevent
 	THREEx.CloudController.MicroeventMixin(this)
 	// basic connection
-	var socket = io.connect('http://192.168.1.169')
+	var socket = io.connect()
 	this.socket= socket
 
-	socket.on('connect', function(){
-		console.log('connected to server')
-	})
-	socket.on('disconnect', function(){
-		console.warn('disconnected to server')
-	})
 
 	socket.on('echoMessage', function(data){
 		if( data.type === 'screenshot' ){
