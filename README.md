@@ -6,13 +6,15 @@ It is a
 for 
 [three.js](http://threejs.org)
 which provide an 2-cents cloudgaming solution for webgl games.
-The implementation is simple. The whole thing is 300lines at the moment.
+The implementation is simple. 
 It is easy to use too. 
+You can include it in your game in a snap.
+The whole thing is a little more 300lines at the moment.
+
 I did a minigame to test it. 
 It worked ok at 20fps over wifi. 
 Performances may fit your use case or not.
-Bench it and see. 
-
+Bench it and see.
 You can see slides [here](http://jeromeetienne.github.io/threex.cloudgaming/slides/)
 
 Show Don't Tell
