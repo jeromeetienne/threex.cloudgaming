@@ -23,9 +23,9 @@ THREEx.CloudRendererScreenUpdater	= function(cloudRenderer, renderer, camera){
 	//		send Screenshot if changed					//
 	//////////////////////////////////////////////////////////////////////////////////
 	
-	var lastDataUrl		= ''
-	var maxFps		= 20
-	var lastDate		= null
+	var lastDataUrl	= ''
+	var maxFps	= 20
+	var lastDate	= null
 	this.sendScreenshotIfChanged	= function(){
 		var present	= Date.now()/1000
 		if( lastDate !== null && present - lastDate < 1/maxFps )	return;

@@ -1,8 +1,12 @@
 build:
-	cleaver slides.md
+	cleaver slides-intro.md
+	cleaver slides-remarks.md
 
-buildDev:
-	cleaver watch slides.md
+watchRemarks:
+	cleaver watch slides-remarks.md
+
+watchIntro:
+	cleaver watch slides-intro.md
 
 server:
 	python -m SimpleHTTPServer 4000

@@ -9,11 +9,10 @@ var file	= new static.Server('./');
 var app	= require('http').createServer(function( request, response ){
 	request.addListener('end', function () {
 		file.serve(request, response);
-	}).resume();
+	}).resume()
 })
 
-app.listen(8000);
-
+app.listen(8000)
 
 //////////////////////////////////////////////////////////////////////////////////
 //		socket.io							//

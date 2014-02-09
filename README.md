@@ -5,10 +5,9 @@ It is a
 [threex](http://jeromeetienne.github.io/threex/) module 
 for 
 [three.js](http://threejs.org)
-which provide an 2-cents cloudgaming solution for webgl games.
-The implementation is simple. 
+which provide a simple cloudgaming solution for webgl games.
 It is easy to use too. 
-You can include it in your game in a snap.
+You can put it in your game in a snap.
 The whole thing is a little more 300lines at the moment.
 I did a minigame to test it. 
 It worked ok at 20fps over wifi. 
@@ -67,7 +66,7 @@ node app.js
 ```
 
 It wait on [http://127.0.0.1:8000](http://127.0.0.1:8000)
-It is a simple echo server. 
+It is a simple echo server.
 It lets *renderer* and *controller* communicate together.
 
 ## Use threex.cloudgaming Core

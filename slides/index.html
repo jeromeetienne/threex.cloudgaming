@@ -424,6 +424,8 @@ pre .chunk {
 <pre><code>Trying to run a game written for device A
 on a device B, typically dumber than A.</code></pre>
 </section>
+    <section class="slide"><h2 id="what-it-is-for-us-">What it is for us ?</h2>
+</section>
     <section class="slide"><h3 id="what-is-our-use-case">What is Our Use Case</h3>
 <p>Let&#39;s clear the dust a bit...</p>
 <ul>
@@ -437,18 +439,21 @@ on a device B, typically dumber than A.</code></pre>
 <li>To display a webgl game </li>
 <li>on a non-webgl player device</li>
 </ul>
-<p><strong>Simple Enougth...</strong></p>
+<p><strong>Simple Enough...</strong></p>
 </section>
-    <section class="slide"><h1 id="early-data">Early Data</h1>
+    <section class="slide"><h2 id="ok-we-know-the-target-what-s-next-">Ok We Know the Target, What&#39;s Next ?</h2>
 </section>
-    <section class="slide"><h3 id="early-data-rendering">Early data - rendering</h3>
+    <section class="slide"><h1 id="early-study">Early Study</h1>
+<h2 id="for-early-prototype">For Early Prototype</h2>
+</section>
+    <section class="slide"><h3 id="early-study-rendering">Early Study - Rendering</h3>
 <ul>
 <li>So we got to render our game in server</li>
 <li>it will be <strong>rendered via a web browser</strong></li>
 <li>seems natural choise to render webgl</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="early-data-architechture">Early data - architechture</h3>
+    <section class="slide"><h3 id="early-study-architechture">Early Study - Architechture</h3>
 <p>3 parts </p>
 <ul>
 <li><strong>a renderer :</strong> the brower running our game</li>
@@ -456,7 +461,7 @@ on a device B, typically dumber than A.</code></pre>
 <li><strong>a server :</strong> ensures the communication between both</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="early-data-networking">Early data - networking</h3>
+    <section class="slide"><h3 id="early-study-networking">Early Study - Networking</h3>
 <ul>
 <li>networking done thru websocket</li>
 <li>no webrtc at the moment</li>
@@ -464,7 +469,7 @@ on a device B, typically dumber than A.</code></pre>
 <li>especially on mobile phone, our usecase.</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="early-data-software">Early data - Software</h3>
+    <section class="slide"><h3 id="early-study-software">Early Study - Software</h3>
 <ul>
 <li>server in node.js</li>
 <li>websocket are trivial with socket.io</li>
@@ -473,9 +478,12 @@ on a device B, typically dumber than A.</code></pre>
 </ul>
 <p><strong>implementation is easy</strong></p>
 </section>
-    <section class="slide"><h1 id="principles-of-operations">Principles Of Operations</h1>
+    <section class="slide"><h2 id="looks-good-">Looks Good…</h2>
+<h2 id="what-would-it-be-in-action-">What Would it be in Action ?</h2>
 </section>
-    <section class="slide"><h3 id="principles-of-operations-server">Principles Of Operations / Server</h3>
+    <section class="slide"><h1 id="theory-of-operations">Theory Of Operations</h1>
+</section>
+    <section class="slide"><h3 id="theory-of-operations-server">Theory Of Operations - Server</h3>
 <ul>
 <li>a renderer browser web running the game</li>
 <li>take regular screenshots with <a href="https://developer.mozilla.org/en/docs/Web/API/HTMLCanvasElement#Methods">.toDataUrl()</a></li>
@@ -485,7 +493,7 @@ on a device B, typically dumber than A.</code></pre>
 </li>
 </ul>
 </section>
-    <section class="slide"><h3 id="principles-of-operations-player">Principles Of Operations / Player</h3>
+    <section class="slide"><h3 id="theory-of-operations-player">Theory Of Operations - Player</h3>
 <ul>
 <li>player can see webgl rendering on any device</li>
 <li>player uses touch screen as inputs</li>
@@ -493,25 +501,22 @@ on a device B, typically dumber than A.</code></pre>
 <li>server send them back to the renderer.</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="principles-of-operations-output">Principles Of Operations / Output</h3>
+    <section class="slide"><h3 id="theory-of-operations-output">Theory Of Operations - Output</h3>
 <ul>
 <li>browser receives inputs from the player.</li>
 <li>player sees what is displayed in the browser.</li>
 </ul>
 <p><strong>we got the whole loop</strong></p>
 </section>
-    <section class="slide"><h3 id="principles-of-operations-results">Principles Of Operations / Results</h3>
+    <section class="slide"><h3 id="theory-of-operations-results">Theory Of Operations - Results</h3>
 <ul>
-<li>this is actual cloud gaming! </li>
+<li>This is actual cloud gaming! </li>
 <li>Simple implementation</li>
 <li>Less than 24h to write!</li>
-<li>Performances? left as an exercice to the reader :)<ul>
-<li>ok we talk about it at the end</li>
-</ul>
-</li>
+<li>Performances? left as an exercice to the reader :)</li>
 </ul>
 </section>
-    <section class="slide"><h1 id="separator">Separator</h1>
+    <section class="slide"><h2 id="nice-concepts-what-about-the-code-">Nice Concepts! What About the Code ?</h2>
 </section>
     <section class="slide"><h1 id="implementation">Implementation</h1>
 </section>
@@ -545,15 +550,14 @@ on a device B, typically dumber than A.</code></pre>
 <li><a href="https://github.com/jeromeetienne/threex.skymap">threex.skymap</a> for the sky</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="controller-minigame">Controller - Minigame</h3>
+    <section class="slide"><h3 id="controller-virtualjoystick">Controller - VirtualJoystick</h3>
 <ul>
 <li>use <a href="http://github.com/jeromeetienne/virtualjoystick.js">virtualjoystick.js</a> to have joystick on touch screen</li>
 <li>more info in <a href="http://learningthreejs.com/blog/2011/12/26/let-s-make-a-3d-game-virtual-joystick/">this post</a> froms <a href="http://learningthreejs.com">learning three.js blog</a>.</li>
 <li>Provide right/up/left/down</li>
 </ul>
-<p><strong>TODO</strong> screenshot fro this lib. take it from the post</p>
 </section>
-    <section class="slide"><h3 id="threex-cloudgaming-the-base">threex.cloudgaming - The Base</h3>
+    <section class="slide"><h3 id="core-threex-cloudgaming">Core - threex.cloudgaming</h3>
 <ul>
 <li>connect to server</li>
 <li>provide echo service thru server</li>
@@ -565,7 +569,7 @@ on a device B, typically dumber than A.</code></pre>
 <li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.server.js">server.js</a> - 14 lines</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="screen-updater">Screen Updater</h3>
+    <section class="slide"><h3 id="helpers-screen-updater">Helpers - Screen Updater</h3>
 <ul>
 <li>handle window resize in controller<ul>
 <li>notify the renderer when it happens</li>
@@ -579,7 +583,7 @@ on a device B, typically dumber than A.</code></pre>
 <li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollerscreenupdater.js">threex.cloudcontrollerscreenupdater.js</a> - 42 lines</li>
 </ul>
 </section>
-    <section class="slide"><h3 id="virtual-joystick">Virtual Joystick</h3>
+    <section class="slide"><h3 id="helpers-virtual-joystick">Helpers - Virtual Joystick</h3>
 <ul>
 <li>read <code>virtualjoystick.js</code> inputs on player device</li>
 <li>send them to renderer via server</li>
@@ -590,135 +594,6 @@ on a device B, typically dumber than A.</code></pre>
 <li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudrenderervirutaljoystick.js">threex.cloudrenderervirtualjoystick.js</a> - 46 lines</li>
 <li><a href="https://github.com/jeromeetienne/threex.cloudgaming/blob/master/threex.cloudcontrollervirtualjoystick.js">threex.cloudcontrollervirtualjoystick.js</a> - 19 lines</li>
 </ul>
-</section>
-    <section class="slide"><h1 id="separator">Separator</h1>
-</section>
-    <section class="slide"><h3 id="network-performance">Network Performance</h3>
-<p>3 areas affect network performances</p>
-<ul>
-<li>how long if the network path</li>
-<li>how much data you send thru this path</li>
-<li>what is the latency of this path</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="possible-improvements">Possible Improvements</h3>
-<p>send data directly from the renderer to the controller</p>
-<ul>
-<li>avoid one hop in the network path</li>
-<li>may improve latency</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="possible-improvements">Possible Improvements</h3>
-<p>Using WebRTC ?</p>
-<ul>
-<li>webrtc allows p2p communication on spec.<ul>
-<li>is it on the remote controller of your usecase?</li>
-</ul>
-</li>
-<li>Quite young feature tho<ul>
-<li>its availability and reliability should be tested</li>
-</ul>
-</li>
-<li>webrtc allows to screen share<ul>
-<li>maybe it could stream our rendering efficiently</li>
-<li>with a nice compressed video format</li>
-</ul>
-</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="possible-improvements">Possible Improvements</h3>
-<p>send smaller data</p>
-<ul>
-<li>send image thru a more compressed format<ul>
-<li>tried png/jpg/webp</li>
-<li>webp is smaller</li>
-</ul>
-</li>
-<li>send image thru a movie format</li>
-</ul>
-</section>
-    <section class="slide"><h1 id="separator">Separator</h1>
-</section>
-    <section class="slide"><h3 id="could-that-be-the-same-game-">Could that be the same game ?</h3>
-<p>difference of inputs</p>
-<ul>
-<li>desktop inputs<ul>
-<li>large screen, keyboard and mouse</li>
-</ul>
-</li>
-<li>mobile phone inputs<ul>
-<li>small screen and touch screen</li>
-<li>no keyboard, no mouse</li>
-</ul>
-</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="could-that-be-the-same-game-">Could that be the same game ?</h3>
-<p>Difference of network capabilities</p>
-<ul>
-<li>mobile network slower than desktop network</li>
-<li>mobile controller requires more from network<ul>
-<li>to send player inputs to game renderer</li>
-<li>to receive rendering display from server</li>
-</ul>
-</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="could-that-be-the-same-game-">Could that be the same game ?</h3>
-<p>Difference of network latency</p>
-<ul>
-<li>on desktop, no noticable latency</li>
-<li>on mobile, it has more latency by design</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="could-that-be-the-same-game-">Could that be the same game ?</h3>
-<p><strong>Nope</strong></p>
-<ul>
-<li>big network requirement out of our controls<ul>
-<li>mobile network capabilities</li>
-</ul>
-</li>
-<li>issues in our controls are far from simple either</li>
-</ul>
-<p>=&gt; games needs to be adapated to controller capabilities</p>
-</section>
-    <section class="slide"><h1 id="separator">Separator</h1>
-</section>
-    <section class="slide"><h3 id="initial-thoughts">Initial Thoughts</h3>
-<ul>
-<li>as game must be adapted</li>
-<li>as fps are very costly on remote controller</li>
-<li>how can you adapt your game</li>
-</ul>
-</section>
-    <section class="slide"><ul>
-<li>reduce the need for fps</li>
-<li>it is all between how dumb is the remote controller</li>
-<li>depending on its capability you can run part of the game there</li>
-<li>it doesnt have to be fully dumb</li>
-<li>part of the game run on the server, part run on the controller</li>
-<li>give examples</li>
-</ul>
-</section>
-    <section class="slide"><h3 id="a-remarquable-sweat-spot">A Remarquable Sweat Spot</h3>
-<ul>
-<li>if rendered image doesnt change, it can be cached<ul>
-<li>on server and/or controller</li>
-<li>if cache on player device, it enabled offline playing!</li>
-</ul>
-</li>
-<li>for navigation, prefer fixed point<ul>
-<li>the player go from one point to another</li>
-<li>make caching more easy</li>
-</ul>
-</li>
-<li>Combine both and you can navigate your 3d world like that<ul>
-<li>very similar to <a href="https://www.google.com/maps/views/streetview">google street view</a></li>
-</ul>
-</li>
-</ul>
-</section>
-    <section class="slide"><h1 id="separator">Separator</h1>
 </section>
     <section class="slide"><h1 id="questions-">Questions ?</h1>
 <h2 id="-jerome-etienne-http-twitter-com-jerome_etienne-"><a href="http://twitter.com/jerome_etienne">Jerome Etienne</a></h2>

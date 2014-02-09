@@ -16,7 +16,6 @@ THREEx.CloudRenderer 	= function(){
 	var socket = io.connect()
 	this.socket= socket
 
-
 	socket.on('echoMessage', function(data){
 		if( data.type === 'joystick' ){
 			var inputs	= data.data
