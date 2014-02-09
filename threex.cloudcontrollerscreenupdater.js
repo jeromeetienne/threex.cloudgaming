@@ -11,7 +11,7 @@ var THREEx	= THREEx	|| {};
  */
 THREEx.CloudControllerScreenUpdater	= function(cloudController){
 	var renderInImage	= true
-	this.devicePixelRatio	= 1/2
+	this.devicePixelRatio	= 1/10
 	
 	if( renderInImage === true ){
 		// create domElement

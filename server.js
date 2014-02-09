@@ -25,7 +25,8 @@ io.set('log level', 1)
 
 io.sockets.on('connection', function (socket) {
 	socket.on('echoMessage', function (data) {
-		// console.log('received data to echo')
+		console.log('Echo message : "'+data.type+'"')
+		// process.stdout.write('.');
 		socket.broadcast.emit('echoMessage', data)
 	});
 });
