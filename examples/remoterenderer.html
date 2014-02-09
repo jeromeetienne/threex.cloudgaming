@@ -17,13 +17,13 @@ require([ 'bower_components/threex.minecraft/package.require.js'
 	});
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
-	renderer.setSize( 256,256 );
+	renderer.setSize( 512,512 );
 	document.body.appendChild( renderer.domElement );
 
 	var onRenderFcts= [];
 	var scene	= new THREE.Scene();
 	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 10000 );
-	var camera	= new THREE.PerspectiveCamera(45, 256/256, 0.01, 1000 );
+	var camera	= new THREE.PerspectiveCamera(45, 512/512, 0.01, 1000 );
 	camera.position.z = 2;
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -76,12 +76,35 @@ require([ 'bower_components/threex.minecraft/package.require.js'
 	camera.lookAt(new THREE.Vector3(0,0.5,1))
 	
 
+	//////////////////////////////////////////////////////////////////////////////////
+	//		controls.input based on keyboard				//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var keyboardInputs	= {
+		up	: false,
+		down	: false,
+		left	: false,
+		right	: false,
+	}
+	document.body.addEventListener('keydown', function(event){
+		if( event.keyCode === 'W'.charCodeAt(0) )	keyboardInputs.up	= true
+		if( event.keyCode === 'S'.charCodeAt(0) )	keyboardInputs.down	= true
+		if( event.keyCode === 'A'.charCodeAt(0) )	keyboardInputs.left	= true
+		if( event.keyCode === 'D'.charCodeAt(0) )	keyboardInputs.right	= true
+	})
+	document.body.addEventListener('keyup', function(event){
+		if( event.keyCode === 'W'.charCodeAt(0) )	keyboardInputs.up	= false
+		if( event.keyCode === 'S'.charCodeAt(0) )	keyboardInputs.down	= false
+		if( event.keyCode === 'A'.charCodeAt(0) )	keyboardInputs.left	= false
+		if( event.keyCode === 'D'.charCodeAt(0) )	keyboardInputs.right	= false
+	})
+
 	onRenderFcts.push(function(delta){
 		var inputs	= cloudJoystick.inputs
-		player.controls.input.right	= inputs.right
-		player.controls.input.up	= inputs.up
-		player.controls.input.left	= inputs.left
-		player.controls.input.down	= inputs.down
+		player.controls.input.right	= inputs.right	|| keyboardInputs.right
+		player.controls.input.up	= inputs.up	|| keyboardInputs.up
+		player.controls.input.left	= inputs.left	|| keyboardInputs.left
+		player.controls.input.down	= inputs.down	|| keyboardInputs.down
 	})
 	
 	//////////////////////////////////////////////////////////////////////////////////
