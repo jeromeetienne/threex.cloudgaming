@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<script src='vendor/require.js/require.js'></script>
+<script src='vendor/three.js/build/three.js'></script>
+
+<script src='../threex.cloudrenderer.js'></script>
+<script src='../threex.cloudrendererscreenupdater.js'></script>
+<script src='../threex.cloudrenderervirtualjoystick.js'></script>
+
+<body style='margin: 0px; background-color: #bbbbbb; overflow: hidden;'><script>
+require([ 'bower_components/threex.minecraft/package.require.js'
+	, 'bower_components/threex.skymap/package.require.js'
+	, 'bower_components/threex.montainsarena/package.require.js'
+	, 'bower_components/threex.daynight/package.require.js'
+	], function(){
+	var renderer	= new THREE.WebGLRenderer({
+		preserveDrawingBuffer : true
+	});
+	renderer.setSize( window.innerWidth, window.innerHeight );
+
+	// renderer.setSize( 256,256 );
+	document.body.appendChild( renderer.domElement );
+
+	var onRenderFcts= [];
+	var scene	= new THREE.Scene();
+	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 3000000 );
+	// var camera	= new THREE.PerspectiveCamera(45, 256/256, 0.01, 1000 );
+	camera.position.z = 2;
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		set 3 point lighting						//
+	//////////////////////////////////////////////////////////////////////////////////
+
+	;(function(){
+		// add a ambient light
+		var light	= new THREE.AmbientLight( 0x020202 )
+		scene.add( light )
+		// add a light in front
+		var light	= new THREE.DirectionalLight('white', 1)
+		light.position.set(0.5, 0.5, 2)
+		scene.add( light )
+		// add a light behind
+		var light	= new THREE.DirectionalLight('white', 0.75)
+		light.position.set(-0.5, -0.5, -2)
+		scene.add( light )		
+	})()
+
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+
+	var sunRotation = -1/6*Math.PI*2;
+	onRenderFcts.push(function(delta, now){
+		var dayDuration	= 40
+		sunRotation	+= delta/dayDuration * Math.PI*2
+	})
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		sunSphere							//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var sunSphere	= new THREEx.DayNight.SunSphere()
+	scene.add( sunSphere.object3d )
+	onRenderFcts.push(function(delta, now){
+		sunSphere.update(sunRotation)
+	})
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		directionalLight						//
+	//////////////////////////////////////////////////////////////////////////////////
+        
+
+	var sunLight	= new THREEx.DayNight.SunLight()
+	scene.add( sunLight.object3d )
+	onRenderFcts.push(function(delta, now){
+		sunLight.update(sunRotation)
+	})
+
+;(function(){
+	var light	= sunLight.object3d
+
+	light.castShadow	= true
+	light.shadowCameraNear	= 0.01
+	light.shadowCameraFar	= 250
+	light.shadowCameraFov	= 45
+
+	light.shadowCameraLeft	= -100
+	light.shadowCameraRight	=  100
+	light.shadowCameraTop	=  100
+	light.shadowCameraBottom= -100
+	light.shadowCameraVisible	= true
+
+	light.shadowBias	= 0.001
+	light.shadowDarkness	= 0.6
+
+	light.shadowMapWidth	= 1024
+	light.shadowMapHeight	= 1024
+})
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		skydom								//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var skydom	= new THREEx.DayNight.Skydom()
+	scene.add( skydom.object3d )
+	onRenderFcts.push(function(delta, now){
+		skydom.update(sunRotation)
+	})
+	
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		add the montains						//
+	//////////////////////////////////////////////////////////////////////////////////
+	THREEx.MontainsArena.defaultMaterial	= THREE.MeshPhongMaterial
+	
+	var mesh	= new THREEx.MontainsArena()
+	mesh.scale.multiplyScalar(30)
+	scene.add(mesh)
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		ground								//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	var textureUrl	= 'images/grasslight-small.jpg';
+	var texture	= THREE.ImageUtils.loadTexture(textureUrl);
+	texture.wrapS	= THREE.RepeatWrapping;
+	texture.wrapT	= THREE.RepeatWrapping;
+	texture.repeat.x= 10
+	texture.repeat.y= 10
+	texture.anisotropy = 16;
+
+	var geometry	= new THREE.CircleGeometry(30, 32)
+	var material	= new THREE.MeshPhongMaterial({
+		map	: texture,
+	})
+ 	var mesh	= new THREE.Mesh(geometry, material)
+ 	mesh.lookAt(new THREE.Vector3(0,1,0))
+ 	scene.add(mesh)
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	// var mesh	= THREEx.createSkymap('mars')
+	// scene.add( mesh );
+	//////////////////////////////////////////////////////////////////////////////////
+	//		comment								//
+	//////////////////////////////////////////////////////////////////////////////////
+
+	THREEx.MinecraftChar.defaultMaterial	= THREE.MeshPhongMaterial
+
+	var player	= new THREEx.MinecraftPlayer()
+	scene.add(player.character.root)
+	onRenderFcts.push(function(delta, now){
+		player.update(delta, now)
+	})
+	
+	// attach camera to player
+	player.character.root.add(camera)
+	camera.position.z	= -2
+	camera.position.y	= 1.2
+	camera.lookAt(new THREE.Vector3(0,0.5,3))
+
+	//////////////////////////////////////////////////////////////////////////////////
+	//		controls.input based on keyboard				//
+	//////////////////////////////////////////////////////////////////////////////////
+	
+	document.body.addEventListener('keydown', function(event){
+		var input	= player.controls.input
+		if( event.keyCode === 'W'.charCodeAt(0) )	input.up	= true
+		if( event.keyCode === 'S'.charCodeAt(0) )	input.down	= true
+		if( event.keyCode === 'A'.charCodeAt(0) )	input.left	= true
+		if( event.keyCode === 'D'.charCodeAt(0) )	input.right	= true
+	})
+	document.body.addEventListener('keyup', function(event){
+		var input	= player.controls.input
+		if( event.keyCode === 'W'.charCodeAt(0) )	input.up	= false
+		if( event.keyCode === 'S'.charCodeAt(0) )	input.down	= false
+		if( event.keyCode === 'A'.charCodeAt(0) )	input.left	= false
+		if( event.keyCode === 'D'.charCodeAt(0) )	input.right	= false
+	})
+
+
+	// onRenderFcts.push(function(delta){
+	// 	var inputs	= cloudJoystick.inputs
+	// 	player.controls.input.right	= inputs.right
+	// 	player.controls.input.up	= inputs.up
+	// 	player.controls.input.left	= inputs.left
+	// 	player.controls.input.down	= inputs.down
+	// })
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		render the scene						//
+	//////////////////////////////////////////////////////////////////////////////////
+	onRenderFcts.push(function(){
+		renderer.render( scene, camera );		
+	})
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//		loop runner							//
+	//////////////////////////////////////////////////////////////////////////////////
+	var lastTimeMsec= null
+	requestAnimationFrame(function animate(nowMsec){
+		// keep looping
+		requestAnimationFrame( animate );
+		// measure time
+		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+		lastTimeMsec	= nowMsec
+		// call each update function
+		onRenderFcts.forEach(function(onRenderFct){
+			onRenderFct(deltaMsec/1000, nowMsec/1000)
+		})
+	})
+})
+</script></body>
